@@ -1,0 +1,32 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Najam.Haque
+ * Date: 11/7/2015
+ * Time: 9:12 AM
+ */
+?>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/css/hotel/spinner.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="/js/hotel/priceRangeSlider.js"></script>
+<script>
+    /**
+     * It is important the following values must come from php
+     * so that there is only one central place to control these
+     */
+    var minPrice = <?php echo $minPriceDefault; ?>;
+    var maxPrice = <?php echo $maxPriceDefault; ?>;
+</script>
+<p id="error" class="alert alert-danger <?php echo $error ? "": "hidden" ; ?>">We are sorry. An error has occurred. Please try again later and we might have wrinkled it out.</p>
+<p>
+    <label for="amount">Price range:</label>
+    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        <a id="spinner" class="btn btn-small btn-success has-spinner">
+            <span class="spinner"><i class="icon-spin icon-refresh"></i></span>
+            Searching
+        </a><!-- spinner -->
+</p>
+<div id="slider-range"></div>
+<?php
+echo $this->partial('hotel/partials/searchResult.phtml', ['hotels' => $hotels]);

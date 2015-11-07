@@ -1,0 +1,30 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Najam.Haque
+ * Date: 11/7/2015
+ * Time: 12:15 PM
+ */
+$searchResult = [];
+if (count($hotels)) {
+    $searchResult = $this->partial('hotel/partials/searchResult.phtml', [
+            'hotels' => $hotels,
+        ]
+    );
+}
+/**
+ * Even though , we are passing the result to js as json,
+ * I feel it is better to supply a html formatted result .
+ * That keeps all formatting [and its associated logic in one place]
+ * instead of pushing the formatting logic to js
+ */
+echo json_encode(
+    [
+        'status' => $status,
+        'formattedResult' => $searchResult,
+        'error' => $error,
+        'redirectTo'=>''
+    ]
+);
+
+?>

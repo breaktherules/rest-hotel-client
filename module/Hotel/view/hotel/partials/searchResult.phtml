@@ -1,0 +1,22 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Najam.Haque
+ * Date: 11/7/2015
+ * Time: 10:26 AM
+ */
+?>
+<div class="bs-example">Search Result
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php echo $this->partialLoop('hotel/partials/hotelRow.phtml', $this->hotels) ?>
+        </tbody>
+    </table>
+</div>
