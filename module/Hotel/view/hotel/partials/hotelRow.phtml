@@ -23,6 +23,7 @@ if ($promoPrice) {
      * This is a view decision, so it does not belong in model or controller
      */
     $displayPrice = "<span class='strike'>$" . $regularPrice . " </span>" . "&nbsp; $" . $promoPrice;
+    $displayPrice .= "&nbsp; <span class='description'>" . $price->getPromoDescription() ." </span>";
 }
 ?>
 <tr>

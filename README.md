@@ -45,11 +45,10 @@ Single Responsibility Principle & Separation Of Concern
 The entire business of communicating to the REST API is constrained in a single Model called HotelRestClient. We are internally using ZendRest . However for testing purposes, we mock that ZendRest client with a custom mock class that we created for this purpose.
 
 The class could implement a Repository interface, which I did not due to lack of time. In that case it would be even easier to replace the class later when you use DB as the client code will already be using familiar code.
-To make Proxy Calls to server to simulate Ajax, we used to a separate class so that
+To make Proxy Calls to server to simulate Ajax, we used to a separate class so that we kee the Hotel related calls in a related class.
 
 Code within view should not make decisions about business logic. Nor the code in Controller. The job of Controller is to wire things up.
 As always, the job of view is purely presentational and all decision making logic is restricted within models.
-
 
 Exception Handling
 -------------------
