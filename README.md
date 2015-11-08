@@ -14,7 +14,7 @@ Installation & Execution
 ------------
 ```
 git clone https://github.com/breaktherules/rest-hotel-client .
-composer update
+composer install
 php -S 0.0.0.0:8080 -t public public/index.php
 ```
 
@@ -29,15 +29,26 @@ Testable Code
 -------------
 Both Controller and Model Code are tested. Please note that travis-ci is integrated.
 
+Task 1&2
+--------
+Both of these tasks are done on a single page. Which I have set as the home page of the application. It was not required in the original task to sort the result set, but I have taken the liberty to do so as it makes sense for the end user.
+The sorting is not just based on Pricing , but instead its based on effective pricing which takes into account of any promotional offers that might be on available for that hotel.
+
+Task 3
+-------
+It appears that your server is not configured to response to Origin: header which is a requirement for CORS based ajax calls. However to demonstrate , I have added two other calls. One call uses a our server as a proxy to connect to remote host where we eventually want to connect to.
+Secondly I found an example server , enable-cors.org  that does allow CORS functionality, so to demonstrate you can select that option and make the call. 
+Finally , if you enable CORS calls on your server, I am confident that my solution will work if you slected the third option.
 
 Single Responsibility Principle & Separation Of Concern
 -------------------------------------------------------
-The entire business of communicating to the REST API is constrained in a single Model called HotelRestClient.
+The entire business of communicating to the REST API is constrained in a single Model called HotelRestClient. We are internally using ZendRest . However for testing purposes, we mock that ZendRest client with a custom mock class that we created for this purpose.
+
 The class could implement a Repository interface, which I did not due to lack of time. In that case it would be even easier to replace the class later when you use DB as the client code will already be using familiar code.
 To make Proxy Calls to server to simulate Ajax, we used to a separate class so that
 
 Code within view should not make decisions about business logic. Nor the code in Controller. The job of Controller is to wire things up.
-The job of view is purely presentational and all decision making logic is restricted within models.
+As always, the job of view is purely presentational and all decision making logic is restricted within models.
 
 
 Exception Handling
