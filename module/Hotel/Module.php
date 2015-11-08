@@ -6,7 +6,7 @@
  * Time: 8:54 AM
  */
 namespace Hotel;
-
+use ZendRest\Client\RestClient;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
@@ -23,6 +23,19 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                     __NAMESPACE__ => __DIR__ . '/' ,
                 ),
             ),
+        );
+    }
+    public function getServiceConfig()
+    {
+        return array(
+            'abstract_factories' => [],
+            'aliases' => [],
+            'factories' => [],
+            'invokables' => [],
+            'services' => [
+                'ZendRestClient' => new RestClient(null),
+            ],
+            'shared' => [],
         );
     }
 

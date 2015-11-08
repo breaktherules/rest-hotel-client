@@ -4,6 +4,9 @@
 
 $(function() {
     $("#spinner").hide();
+    if (hideError) {
+        $("#error").hide();
+    }
     var $slider =$("#slider-range");
 
 
@@ -36,13 +39,13 @@ $(function() {
                      * like in an edit operation.
                      */
                     $("#spinner").hide().removeClass('active');
-                    var $searchResult = $("div.bs_example");
-                    if (data.status) {
-                        $searchResult.html(data.formattedResult).show();
+                    var $searchResult = $("div.bs-example");
+                    if (data.success) {
+                         $searchResult.html(data.formattedResult).show();
                         /**
                          * early returns make code more readable
                          */
-                        return ;
+                        return;
                     }
                     $searchResult.hide();
                     $("#error").show();

@@ -13,12 +13,13 @@
 <script>
     /**
      * It is important the following values must come from php
-     * so that there is only one central place to control these
+     * so that there is one central place to control these
      */
     var minPrice = <?php echo $minPriceDefault; ?>;
     var maxPrice = <?php echo $maxPriceDefault; ?>;
+    var hideError = <?php echo $success ? "true" : "false" ; ?>;
 </script>
-<p id="error" class="alert alert-danger <?php echo $error ? "": "hidden" ; ?>">We are sorry. An error has occurred. Please try again later and we might have wrinkled it out.</p>
+<p id="error" class="alert alert-danger">We are sorry. An error has occurred. Please try again later and we might have wrinkled it out.</p>
 <p>
     <label for="amount">Price range:</label>
     <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">

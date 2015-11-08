@@ -1,77 +1,77 @@
-ZendSkeletonApplication
+![Travis-CI](https://travis-ci.org/breaktherules/rest-hotel-client.svg?branch=rc-2015-11-09)
+
+Hotel Client Application
 =======================
 
 Introduction
 ------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
+This simple application demonstrates accomplishes the following.
+* It is able to make REST API calls and consume data.
+* It is able to use a jquery Slider to allow the user filter the results
+* It demonstrates how CORS based ajax call work [and when they don't work]
 
-Installation
+Installation & Execution
 ------------
+```
+git clone https://github.com/breaktherules/rest-hotel-client .
+composer update
+php -S 0.0.0.0:8080 -t public public/index.php
+```
 
-Using Composer (recommended)
-----------------------------
-The recommended way to get a working copy of this project is to clone the repository
-and use `composer` to install dependencies using the `create-project` command:
 
-    curl -s https://getcomposer.org/installer | php --
-    php composer.phar create-project -sdev --repository-url="https://packages.zendframework.com" zendframework/skeleton-application path/to/install
+then visit http://localhost:8080/ with your browser
 
-Alternately, clone the repository and manually invoke `composer` using the shipped
-`composer.phar`:
 
-    cd my/project/dir
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git
-    cd ZendSkeletonApplication
-    php composer.phar self-update
-    php composer.phar install
+Important Points About the Application
+======================================
 
-(The `self-update` directive is to ensure you have an up-to-date `composer.phar`
-available.)
+Testable Code
+-------------
+Both Controller and Model Code are tested. Please note that travis-ci is integrated.
 
-Another alternative for downloading the project is to grab it via `curl`, and
-then pass it to `tar`:
 
-    cd my/project/dir
-    curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
+Single Responsibility Principle & Separation Of Concern
+-------------------------------------------------------
+The entire business of communicating to the REST API is constrained in a single Model called HotelRestClient.
+The class could implement a Repository interface, which I did not due to lack of time. In that case it would be even easier to replace the class later when you use DB as the client code will already be using familiar code.
+To make Proxy Calls to server to simulate Ajax, we used to a separate class so that
 
-You would then invoke `composer` to install dependencies per the previous
-example.
+Code within view should not make decisions about business logic. Nor the code in Controller. The job of Controller is to wire things up.
+The job of view is purely presentational and all decision making logic is restricted within models.
 
-Using Git submodules
+
+Exception Handling
+-------------------
+Please note the lack of if-structure in Controller which is a huge boost for readability as the reader does not have mentally branch the flow.
+There is a normal flow of code which allows the successful execution. And then in case of error code flows the exception .
+Its nothing new, but since I see so many people don't use this, I thought to point this out.
+
+
+Use of Configuration
 --------------------
-Alternatively, you can install using native git submodules:
+Any API access points or default values have been put into a config file. Hence it provides a central way to control these values rather than scattered all over.
 
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git --recursive
+PSR-2 Compliant Code
+--------------------
+The code I worte is PSR-2 compliant. Some code used either from ZF2 or borrowed from somewhere may not be as such.
 
-Web Server Setup
-----------------
+Proper Use of namespaces
+-----------------------
+The classes have been organized into proper namespaces. Note the Exception classes.
 
-### PHP CLI Server
 
-The simplest way to get started if you are using PHP 5.4 or above is to start the internal PHP cli-server in the root directory:
+Running the Tests
+-----------------
+Although you can see the status of test in travis-ci. Here is how it looks when you run it on command line.
 
-    php -S 0.0.0.0:8080 -t public/ public/index.php
+```
+$ cd test
+$ ../vendor/bin/phpunit
+PHPUnit 5.0.8 by Sebastian Bergmann and contributors.
 
-This will start the cli-server on port 8080, and bind it to all network
-interfaces.
+.....                                                              5 / 5 (100%)
 
-**Note: ** The built-in CLI server is *for development only*.
+Time: 2.69 seconds, Memory: 5.75Mb
 
-### Apache Setup
-
-To setup apache, setup a virtual host to point to the public/ directory of the
-project and you should be ready to go! It should look something like below:
-
-    <VirtualHost *:80>
-        ServerName zf2-tutorial.localhost
-        DocumentRoot /path/to/zf2-tutorial/public
-        SetEnv APPLICATION_ENV "development"
-        <Directory /path/to/zf2-tutorial/public>
-            DirectoryIndex index.php
-            AllowOverride All
-            Order allow,deny
-            Allow from all
-        </Directory>
-    </VirtualHost>
+OK (5 tests, 7 assertions)
+```

@@ -4,10 +4,30 @@
  * User: Najam.Haque
  * Date: 11/7/2015
  * Time: 10:35 AM
- */?>
+ */
+
+/**
+ * If we talk to an entity, it must only be readonly
+ */
+/** @var Hotel\Entity\Hotel $hotel */
+
+/** @var Hotel\Entity\Price $price */
+
+$price = $hotel->getPrice();
+$regularPrice = $price->getRegularPrice();
+$displayPrice = $regularPrice;
+
+$promoPrice= $price->getPromoPrice();
+if ($promoPrice) {
+    /**
+     * This is a view decision, so it does not belong in model or controller
+     */
+    $displayPrice = "<span class='strike'>$" . $regularPrice . " </span>" . "&nbsp; $" . $promoPrice;
+}
+?>
 <tr>
-    <td><?php echo $this->hotelName; ?></td>
-    <td><?php echo $this->price->hotelPrice; ?></td>
-    <td><img src="<?php echo $this->hotelStarUrl; ?>"></td>
+    <td><?php echo $hotel->getName(); ?></td>
+    <td><?php echo $displayPrice; ?></td>
+    <td><img src="<?php  echo $hotel->getRatingUrl(); ?>"></td>
 </tr>
 

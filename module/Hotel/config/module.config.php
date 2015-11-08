@@ -11,25 +11,55 @@ return array(
             'Hotel\Controller\Hotel' => 'Hotel\Controller\HotelController',
         ),
     ),
-    'router' => array(
-        'routes' => array(
-            'hotel' => array(
-                'type'    => 'segment',
+    'router' => [
+        'routes' => [
+            'home' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/hotel[/:action][/:min]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'min'     => '[0-9]+',
-                        //'max'     => '[0-9]+',
-                    ),
+                    'route'    => '/',
                     'defaults' => array(
                         'controller' => 'Hotel\Controller\Hotel',
                         'action'     => 'index',
                     ),
                 ),
             ),
-        ),
-    ),
+
+
+            'hotel' => [
+                'type'    => 'segment',
+                'options' => [
+                    'route'    => '/hotel[/:action][/]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
+                    'defaults' => [
+                        'controller' => 'Hotel\Controller\Hotel',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'task3'=>[
+                'type'    => 'literal',
+                'options' => [
+                    'route'    => '/hotel/task3/',
+                    'defaults' => [
+                        'controller' => 'Hotel\Controller\Hotel',
+                        'action'     => 'task3',
+                    ],
+                ],
+            ],
+            'ajax'=>[
+                'type'    => 'literal',
+                'options' => [
+                    'route'    => '/hotel/ajax/',
+                    'defaults' => [
+                        'controller' => 'Hotel\Controller\Hotel',
+                        'action'     => 'ajax',
+                    ],
+                ],
+            ],
+        ],
+    ],
     'view_manager' => array(
         'doctype'                  => 'HTML5',
         'template_map' => [

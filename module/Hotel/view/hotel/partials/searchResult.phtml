@@ -16,7 +16,15 @@
         </tr>
         </thead>
         <tbody>
-        <?php echo $this->partialLoop('hotel/partials/hotelRow.phtml', $this->hotels) ?>
+        <?php
+        /**
+         * Perhaps It would be even better to use partialLoop.
+         * That will avoid a foreach
+         */
+        foreach ($this->hotels as $hotel) {
+            echo $this->partial('hotel/partials/hotelRow.phtml', ['hotel' => $hotel]);
+        }
+        ?>
         </tbody>
     </table>
 </div>

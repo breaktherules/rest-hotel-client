@@ -20,9 +20,8 @@ if (count($hotels)) {
  */
 echo json_encode(
     [
-        'status' => $status,
+        'success' => $success,
         'formattedResult' => $searchResult,
-        'error' => $error,
         'redirectTo'=>''
     ]
 );

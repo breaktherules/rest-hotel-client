@@ -15,7 +15,7 @@
 
 .has-spinner.active .spinner {
     opacity: 1;
-    width: auto; /* This doesn't work, just fix for unkown width elements */
+    width: auto; /* This doesn't work, just fix for unknown width elements */
 }
 
 .has-spinner.btn-mini.active .spinner {
@@ -32,4 +32,9 @@
 
 .has-spinner.btn-large.active .spinner {
     width: 19px;
+}
+
+.strike
+{
+    text-decoration: line-through;
 }
